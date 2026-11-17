@@ -13,11 +13,9 @@ public class App {
         assets.add(new Vehicle("Tom's truck", "2024-01-01", new BigDecimal("20000.00"), "Ford F-150", 2022, 12000));
 
         for (Asset asset : assets) {
-            if (asset instanceof House) {
-                House house = (House) asset;
+            if (asset instanceof House house) {
                 System.out.println("Address: " + house.getAddress());
-            } else if (asset instanceof Vehicle) {
-                Vehicle vehicle = (Vehicle) asset;
+            } else if (asset instanceof Vehicle vehicle) {
                 System.out.printf("""
                         Year: %d
                         Make & Model: %s\n""", vehicle.getYear(), vehicle.getMakeModel());
