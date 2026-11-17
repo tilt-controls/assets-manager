@@ -1,14 +1,24 @@
 package com.pluralsight;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
-        House house1 = new House("my house", "2024-08-20", new BigDecimal("250000.00"), "123 Street", 2, 1800, 6000);
+        ArrayList<Asset> assets = new ArrayList<>();
 
-        System.out.println(house1.getValue());
+        assets.add(new House("my house", "2024-08-20", new BigDecimal("250000.00"), "123 Street", 2, 1800, 6000));
+        assets.add(new House("your house", "2026-09-25", new BigDecimal("150000.00"), "456 Avenue", 1, 3000, 8000));
+        assets.add(new Vehicle("Used Car", "2014-06-15", new BigDecimal("30000.00"), "Honda Civc", 2014, 130000));
+        assets.add(new Vehicle("Tom's truck", "2024-01-01", new BigDecimal("20000.00"), "Ford F-150", 2022, 12000));
 
-        Vehicle vehicle1 = new Vehicle("Used Ford Truck", "2014-06-15", new BigDecimal("20000.00"), "Ford F-150", 2014, 120000);
-        System.out.println(vehicle1.getValue());
+        for (Asset asset : assets) {
+            System.out.printf("""
+                    Description: %s
+                    Date: %s
+                    Original Cost: %.2f
+                    Value: %.2f
+                    \n""", asset.getDescription(), asset.getDateAcquired(), asset.getOriginalCost(), asset.getValue());
+        }
     }
 }
