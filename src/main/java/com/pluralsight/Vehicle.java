@@ -17,17 +17,22 @@ public class Vehicle extends Asset{
     @Override
     public BigDecimal getValue() {
         int vehicleAge = Year.now().getValue() - getYear();
+        BigDecimal reducedValue;
         if (vehicleAge <= 3) {
-            BigDecimal reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.03"))).subtract(new BigDecimal("1"));
+            reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.03"))).subtract(new BigDecimal("1"));
         } else if (vehicleAge <= 6) {
-            BigDecimal reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.06"))).subtract(new BigDecimal("1"));
+            reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.06"))).subtract(new BigDecimal("1"));
         } else if (vehicleAge <= 10) {
-            BigDecimal reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.08"))).subtract(new BigDecimal("1"));
+            reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.08"))).subtract(new BigDecimal("1"));
         } else {
-            BigDecimal reducedValue = new BigDecimal("1000.00");
+            reducedValue = new BigDecimal("1000.00");
         }
-        if (getMakeModel().contains("honda") || getMakeModel().contains("toyota") && getOdometer() >= 100000) {
-            return
+        if (getOdometer() >= 100000) {
+            if (getMakeModel().contains("honda") || getMakeModel().contains("toyota") {
+                return getOriginalCost().multiply(reducedValue);
+            } else {
+                return getOriginalCost().multiply(reducedValue).multiply(new BigDecimal("0.25"));
+            }
         }
     }
 
