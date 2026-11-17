@@ -1,5 +1,6 @@
 package com.pluralsight;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.*;
 
 public class Vehicle extends Asset{
@@ -18,21 +19,27 @@ public class Vehicle extends Asset{
     public BigDecimal getValue() {
         int vehicleAge = Year.now().getValue() - getYear();
         BigDecimal reducedValue;
+        BigDecimal value;
+        BigDecimal rate;
         if (vehicleAge <= 3) {
-            reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.03"))).subtract(new BigDecimal("1"));
+            rate = new BigDecimal("0.03");
+            reducedValue = new BigDecimal("1").subtract(new BigDecimal(vehicleAge).multiply(rate));
+            value = getOriginalCost().multiply(reducedValue);
         } else if (vehicleAge <= 6) {
-            reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.06"))).subtract(new BigDecimal("1"));
+            rate = new BigDecimal("0.06");
+            reducedValue = new BigDecimal("1").subtract(new BigDecimal(vehicleAge).multiply(rate));
+            value = getOriginalCost().multiply(reducedValue);
         } else if (vehicleAge <= 10) {
-            reducedValue = new BigDecimal(vehicleAge).multiply((new BigDecimal("0.08"))).subtract(new BigDecimal("1"));
+            rate = new BigDecimal("0.08");
+            reducedValue = new BigDecimal("1").subtract(new BigDecimal(vehicleAge).multiply(rate));
+            value = getOriginalCost().multiply(reducedValue);
         } else {
-            reducedValue = new BigDecimal("1000.00");
+            value = new BigDecimal("1000.00");
         }
-        if (getOdometer() >= 100000) {
-            if (getMakeModel().contains("honda") || getMakeModel().contains("toyota") {
-                return getOriginalCost().multiply(reducedValue);
-            } else {
-                return getOriginalCost().multiply(reducedValue).multiply(new BigDecimal("0.25"));
-            }
+        if (getOdometer() > 100000 && !getMakeModel().toLowerCase().contains("honda") && !getMakeModel().toLowerCase().contains("toyota")) {
+                return value.multiply(new BigDecimal("0.75")).setScale(2, RoundingMode.HALF_UP);
+        } else {
+            return value.setScale(2, RoundingMode.HALF_UP);
         }
     }
 
