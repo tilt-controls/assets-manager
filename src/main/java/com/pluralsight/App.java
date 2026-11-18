@@ -11,6 +11,7 @@ public class App {
         assets.add(new House("your house", "2026-09-25", new BigDecimal("150000.00"), "456 Avenue", 1, 3000, 8000));
         assets.add(new Vehicle("Used Car", "2014-06-15", new BigDecimal("30000.00"), "Honda Civc", 2014, 130000));
         assets.add(new Vehicle("Tom's truck", "2024-01-01", new BigDecimal("20000.00"), "Ford F-150", 2022, 12000));
+        assets.add(new Cash("Cash under mattress", "2026-11-18",new BigDecimal("10000")));
 
         for (Asset asset : assets) {
             if (asset instanceof House house) {
