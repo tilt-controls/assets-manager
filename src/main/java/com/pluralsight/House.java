@@ -18,6 +18,7 @@ public class House extends Asset {
 
     @Override
     public BigDecimal getValue() {
+
         if (getCondition() == 1) {
             return new BigDecimal("180.00").multiply(new BigDecimal(getSquareFoot())).add(new BigDecimal("0.25").multiply(new BigDecimal(getLotSize())));
         }
@@ -30,8 +31,9 @@ public class House extends Asset {
         else if (getCondition() == 4) {
             return new BigDecimal("80.00").multiply(new BigDecimal(getSquareFoot())).add(new BigDecimal("0.25").multiply(new BigDecimal(getLotSize())));
         }
-        else
-            return null;
+        else {
+            throw new IllegalArgumentException("Invalid condition");
+        }
     }
 
     public String getAddress() {
